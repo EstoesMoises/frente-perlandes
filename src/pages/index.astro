@@ -1,0 +1,266 @@
+---
+import { Image } from 'astro:assets';
+import '@fontsource/big-shoulders-display/800';
+import '@fontsource/barlow-condensed/500';
+import '@fontsource/barlow-condensed/600';
+import '@fontsource/barlow/400';
+import '@fontsource/barlow/600';
+import '../styles/global.css';
+import { frente, grupos, laminas, type Grupo } from '../data/frente';
+
+const porGrupo = (Object.keys(grupos) as Grupo[]).map((g) => ({
+  clave: g,
+  titulo: grupos[g],
+  items: laminas.filter((l) => l.grupo === g),
+}));
+
+const capturas = Object.entries(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/carteles/*.{png,jpg,jpeg,webp}', { eager: true })
+)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([ruta, mod]) => ({
+    src: mod.default,
+    leyenda: ruta.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '),
+  }));
+
+const casillas = [
+  { etiqueta: 'Dirigente', valor: frente.dirigente },
+  { etiqueta: 'Sede (coordenadas)', valor: frente.sede },
+].filter((c) => c.valor);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{frente.nombre}</title>
+    <meta name="description" content={`Plan de obras de la nación de ${frente.nacion}: doce propuestas del ${frente.nombre}. ${frente.lema}.`} />
+    <meta name="theme-color" content="#f1ede2" />
+  </head>
+  <body>
+    <main class="sheet">
+      <header class="cartela">
+        <div class="name">
+          <h1>{frente.nombre}</h1>
+        </div>
+        <div class="field"><span class="label">Láminas</span><span class="value">12 propuestas</span></div>
+        <div class="field"><span class="label">Plano</span><span class="value">Esquema, sin escala real</span></div>
+        <div class="field"><span class="label">Lema</span><span class="value">{frente.lema}</span></div>
+      </header>
+
+      <section class="plan-layout" aria-label="Plano general de Perland">
+        <figure class="plan">
+          <svg viewBox="0 0 800 520" role="img" aria-labelledby="plano-t plano-d">
+            <title id="plano-t">Plano general de {frente.nacion}</title>
+            <desc id="plano-d">
+              Un muro octogonal rodea {frente.capital}. Una línea de ferrocarril cruza el muro y se ramifica hacia el
+              noreste y el suroeste. Una frontera punteada marca los territorios por recuperar.
+            </desc>
+            <defs>
+              <pattern id="cuadricula" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="#1b2330" stroke-opacity="0.12" stroke-width="1" />
+              </pattern>
+              <mask id="m-muro" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="520">
+                <path class="draw" pathLength="1" d="M330 130H470L540 200V300L470 370H330L260 300V200Z" fill="none" stroke="#fff" stroke-width="30" stroke-linejoin="round" />
+              </mask>
+              <mask id="m-ferro" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="520">
+                <path class="draw d2" pathLength="1" d="M70 250H730" fill="none" stroke="#fff" stroke-width="30" />
+                <path class="draw d2" pathLength="1" d="M600 250L660 190V90" fill="none" stroke="#fff" stroke-width="30" />
+                <path class="draw d2" pathLength="1" d="M200 250L140 310V430" fill="none" stroke="#fff" stroke-width="30" />
+              </mask>
+            </defs>
+
+            <rect width="800" height="520" fill="url(#cuadricula)" />
+
+            <g data-feature="terr">
+              <path d="M40 40H760V400L700 460V480H100L40 420Z" fill="none" stroke="#1b2330" stroke-width="2.5" stroke-dasharray="12 8" />
+              <text x="64" y="76" class="t">Territorios por recuperar</text>
+            </g>
+
+            <g data-feature="muro">
+              <g mask="url(#m-muro)">
+                <path d="M330 130H470L540 200V300L470 370H330L260 300V200Z" fill="none" stroke="#c9461a" stroke-width="14" stroke-linejoin="round" stroke-dasharray="18 4" />
+              </g>
+              <g fill="none" stroke="#1b2330" stroke-width="3" stroke-linecap="square">
+                <path d="M110 150l16 16M126 150l-16 16" />
+                <path d="M690 130l16 16M706 130l-16 16" />
+                <path d="M232 420l16 16M248 420l-16 16" />
+                <path d="M560 420l16 16M576 420l-16 16" />
+                <path d="M110 330l16 16M126 330l-16 16" />
+              </g>
+              <text x="400" y="176" text-anchor="middle" class="t sm">Noche sin miedo</text>
+              <text x="556" y="162" class="t o">Muro</text>
+            </g>
+
+            <g data-feature="ferro">
+              <g mask="url(#m-ferro)">
+                <g fill="none" stroke="#226582" stroke-width="8">
+                  <path d="M70 250H730" />
+                  <path d="M600 250L660 190V90" />
+                  <path d="M200 250L140 310V430" />
+                </g>
+                <g fill="none" stroke="#f1ede2" stroke-width="8" stroke-dasharray="2 10">
+                  <path d="M70 250H730" />
+                  <path d="M600 250L660 190V90" />
+                  <path d="M200 250L140 310V430" />
+                </g>
+              </g>
+              <g fill="#f1ede2" stroke="#1b2330" stroke-width="3">
+                <circle cx="70" cy="250" r="9" />
+                <circle cx="730" cy="250" r="9" />
+                <circle cx="660" cy="90" r="9" />
+                <circle cx="140" cy="430" r="9" />
+                <circle cx="260" cy="250" r="9" />
+                <circle cx="540" cy="250" r="9" />
+                <circle cx="600" cy="250" r="11" />
+                <circle cx="200" cy="250" r="11" />
+              </g>
+              <text x="640" y="284" class="t b" text-anchor="middle">Ferrocarril</text>
+            </g>
+
+            <g data-feature="capital">
+              <rect x="366" y="216" width="68" height="68" fill="#f1ede2" stroke="#1b2330" stroke-width="3" />
+              <g fill="#1b2330">
+                <rect x="376" y="226" width="18" height="18" />
+                <rect x="406" y="226" width="18" height="18" />
+                <rect x="376" y="256" width="18" height="18" />
+                <rect x="406" y="256" width="18" height="18" />
+              </g>
+              <circle cx="400" cy="250" r="13" fill="#f1ede2" stroke="#1b2330" stroke-width="3" />
+              <circle cx="400" cy="250" r="5" fill="#1b2330" />
+              <text x="400" y="326" text-anchor="middle" class="t">{frente.capital}</text>
+            </g>
+
+                      </svg>
+        </figure>
+
+        <div class="plan-aside">
+          <p class="pitch">
+            <strong>Perland necesita un plan, no una promesa.</strong> Doce láminas para construir una nación libre,
+            unida y en orden, con un muro, un ferrocarril y un Estado que cumpla sus propias reglas.
+          </p>
+          <div>
+            <span class="label">Leyenda</span>
+            <ul class="legend">
+              <li>
+                <svg viewBox="0 0 56 18" aria-hidden="true"><path d="M0 9H56" stroke="#c9461a" stroke-width="12" stroke-dasharray="14 3" /></svg>
+                Muro contra los monstruos
+              </li>
+              <li>
+                <svg viewBox="0 0 56 18" aria-hidden="true"><path d="M0 9H56" stroke="#226582" stroke-width="7" /><path d="M0 9H56" stroke="#f1ede2" stroke-width="7" stroke-dasharray="2 9" /></svg>
+                Ferrocarril
+              </li>
+              <li>
+                <svg viewBox="0 0 56 18" aria-hidden="true"><path d="M0 9H56" stroke="#1b2330" stroke-width="2.5" stroke-dasharray="10 7" /></svg>
+                Territorios por recuperar
+              </li>
+              <li>
+                <svg viewBox="0 0 56 18" aria-hidden="true"><rect x="19" y="1" width="16" height="16" fill="#f1ede2" stroke="#1b2330" stroke-width="2.5" /></svg>
+                {frente.capital}
+              </li>
+            </ul>
+          </div>
+          <div class="stamp-wrap">
+            <a class="stamp" href="#firmas"><b>Afíliate: busca a un dirigente</b></a>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="programa-t">
+        <div class="section-head">
+          <h2 id="programa-t">Las doce láminas del programa</h2>
+          <p>Cada lámina es un compromiso con el pueblo perlandés. Las obras se dibujan en el plano; el resto se cumple con la ley.</p>
+        </div>
+        <div class="register">
+          {porGrupo.map((g) => (
+            <div class={`group c-${g.clave}`}>
+              <h3><i></i>{g.titulo}</h3>
+              <ol>
+                {g.items.map((l) => (
+                  <li class={`lamina c-${l.grupo}`} data-plano={l.plano} tabindex={l.plano ? 0 : undefined}>
+                    <span class="n">{l.n}</span>
+                    <h4>{l.titulo}</h4>
+                    <p>{l.texto}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="aviso" id="aviso" aria-labelledby="aviso-t">
+        <div class="rev">
+          <table>
+            <thead>
+              <tr><th>Rev.</th><th>Fe de erratas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td>Carteles contra EstoesMoises</td></tr>
+            </tbody>
+          </table>
+          <div class="mark"><b>Falso</b></div>
+          {capturas.length > 0 && (
+            <div class="pruebas">
+              {capturas.map((c) => (
+                <figure>
+                  <Image src={c.src} alt={`Captura del cartel falso: ${c.leyenda}`} widths={[480, 720, 960]} sizes="(max-width: 960px) 100vw, 40vw" />
+                  <figcaption>{c.leyenda}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+        </div>
+        <div class="aviso-body">
+          <h2 id="aviso-t">Carteles falsos andan por la ciudad</h2>
+          <p>
+            En la ciudad han aparecido carteles de «WANTED» que acusan a nuestro compañero EstoesMoises de «violación
+            de los derechos humanos», y una cartelera con su nombre que amenaza a quien «no respete las normas», junto
+            a un escenario con horcas.
+          </p>
+          <p><strong>Esas acusaciones son completamente falsas.</strong></p>
+          <p>
+            Un cartel no es una prueba. En un Estado de derecho se acusa ante quien corresponde, con pruebas y con
+            derecho a defenderse, no pegando papeles en los postes.
+          </p>
+          <p>
+            No sabemos quién los puso y no señalamos a nadie. Pedimos que los retiren, y que quien tenga pruebas las
+            presente donde corresponde.
+          </p>
+          <p class="firma">— {frente.nombre}</p>
+        </div>
+      </section>
+
+      <section class="firmas" id="firmas" aria-labelledby="firmas-t">
+        <div class="firmas-copy">
+          <h2 id="firmas-t">Habla con un dirigente en {frente.capital}</h2>
+          <p>
+            Para sumarte al {frente.nombre}, busca a un dirigente en el juego y dile que quieres afiliarte. Es el único
+            trámite.
+          </p>
+        </div>
+        <div class="casillas">
+          {casillas.map((c) => (
+            <div class="casilla">
+              <span class="label">{c.etiqueta}</span>
+              <span class="v">{c.valor}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer class="pie">
+        <span>{frente.nombre} · {frente.lema}</span>
+        <span>Partido ficticio de roleplay del servidor de Minecraft de {frente.nacion}.</span>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  .t { font-family: var(--label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 22px; fill: #1b2330; }
+  .t.sm { font-size: 18px; fill: #3d4757; }
+  .t.o { fill: #1b2330; }
+  .t.b { fill: #1b2330; }
+</style>
