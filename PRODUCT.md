@@ -32,7 +32,7 @@ Roleplay fiction; the party is in-world, the page is out-of-world. Readers know 
 - Party name (confirmed by user): "Frente Perlandés por la Libertad". Motto is still a working title: "Libertad, unidad, orden". Both must live in one place in source.
 - Demonym (confirmed): "perlandeses" (perlandés/perlandesa). Use it everywhere; never "perlinianos".
 - The nation is Perland; its capital/seat is Perland Village.
-- Call to action: speak to a party leader in the game. No leader name, coordinates, or Discord link supplied yet; they are placeholders to replace.
+- Call to action: speak to a party leader in the game. Leader (confirmed): EstoesMoises. Seat (confirmed): Perland Village, near the Spawn; no exact coordinates. No Discord (user said it is not needed).
 
 ## Evidence on Hand
 

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T18:30:00Z",
+  "title": "Design System: Frente Perlandés por la Libertad",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Plan Paper", "canonical": "#f1ede2", "tonalRamp": ["#5c5848", "#8a8570", "#b3ad98", "#cdc6b0", "#e1dbc9", "#f1ede2", "#f7f4ec", "#fcfbf7"] },
+      "paper-deep": { "role": "neutral", "displayName": "Desk Paper", "canonical": "#e6e0d0", "tonalRamp": ["#4f4b3c", "#7a7461", "#a39c86", "#c3bba4", "#d6cfbb", "#e6e0d0", "#f1ede2", "#faf8f2"] },
+      "ink": { "role": "neutral", "displayName": "Delineator Ink", "canonical": "#1b2330", "tonalRamp": ["#0b0e13", "#141a24", "#1b2330", "#2e3a4d", "#46536a", "#66738a", "#8c97a9", "#bcc3ce"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#3d4757", "tonalRamp": ["#1b2330", "#2a3342", "#3d4757", "#576173", "#747d8c", "#9aa1ad", "#c3c7ce", "#e6e8eb"] },
+      "rule": { "role": "neutral", "displayName": "Hairline", "canonical": "#1b233033", "tonalRamp": ["#1b2330", "#1b2330cc", "#1b233099", "#1b233066", "#1b233033", "#1b233022", "#1b233011", "#1b233008"] },
+      "signal-orange": { "role": "primary", "displayName": "Signal Orange", "canonical": "#c9461a", "tonalRamp": ["#3a1507", "#68260e", "#963610", "#c9461a", "#de6a40", "#ea916f", "#f3b9a3", "#f9ded3"] },
+      "rail-teal": { "role": "secondary", "displayName": "Rail Teal", "canonical": "#226582", "tonalRamp": ["#0b2230", "#113445", "#184b61", "#226582", "#3a86a5", "#6aa6bf", "#a0c6d6", "#d3e5ed"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Party name in the title block; uppercase Big Shoulders 800." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, communiqué title, signature-box title." },
+      "title": { "displayName": "Title", "purpose": "Lámina titles and title-block values in condensed uppercase." },
+      "body": { "displayName": "Body", "purpose": "Readable sentences in Barlow, capped near 46-62ch." },
+      "label": { "displayName": "Label", "purpose": "Field names, legend heading, table headers, group headers." }
+    },
+    "shadows": [
+      { "name": "stamp-lift", "value": "0 8px 16px -8px #1b2330a0", "purpose": "The approval stamp, the only object raised above the sheet." },
+      { "name": "stamp-lift-hover", "value": "0 12px 20px -8px #1b2330b0", "purpose": "Stamp hover and focus state." }
+    ],
+    "motion": [
+      { "name": "ease-draw", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "Plan linework drawing in (1.6s wall, 2s railway after 0.9s) and stamp lift (0.25s)." },
+      { "name": "feature-dim", "value": "opacity 0.25s", "purpose": "Plan features dim to 25% when a linked lámina is hovered or focused." },
+      { "name": "row-hover", "value": "background-color 0.2s", "purpose": "Lámina row hover fill." }
+    ],
+    "breakpoints": [
+      { "name": "sheet-max", "value": "1440px" },
+      { "name": "collapse", "value": "960px" },
+      { "name": "narrow", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Approval Stamp",
+      "kind": "custom",
+      "refersTo": "stamp-button",
+      "description": "The single call to action, a tilted orange stamped box.",
+      "html": "<a class=\"ds-stamp\" href=\"#\"><b>Afíliate: busca a un dirigente</b></a>",
+      "css": ".ds-stamp { display: block; text-decoration: none; color: var(--paper, #f1ede2); background: var(--orange, #c9461a); padding: 18px 20px 20px; border: 2px solid #1b2330; outline: 2px solid #c9461a; outline-offset: 4px; transform: rotate(-1.5deg); box-shadow: 0 8px 16px -8px #1b2330a0; transition: transform 0.25s cubic-bezier(.16,1,.3,1), box-shadow 0.25s cubic-bezier(.16,1,.3,1); max-width: 360px; } .ds-stamp b { display: block; font-family: 'Big Shoulders Display', 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 2rem; line-height: 1; } .ds-stamp:hover, .ds-stamp:focus-visible { transform: rotate(0deg) translateY(-2px); box-shadow: 0 12px 20px -8px #1b2330b0; } .ds-stamp:focus-visible { outline: 3px solid #c9461a; outline-offset: 4px; }"
+    },
+    {
+      "name": "Lámina",
+      "kind": "card",
+      "refersTo": "lamina-row",
+      "description": "One numbered program item: numeral, uppercase title, one sentence.",
+      "html": "<div class=\"ds-lamina\" tabindex=\"0\"><span class=\"ds-n\">05</span><h4>Perland Village, país</h4><p>Convertir Perland Village en una potencia continental y en un país.</p></div>",
+      "css": ".ds-lamina { display: grid; grid-template-columns: 72px 1fr; gap: 6px 18px; padding: 18px 24px 20px; background: #f1ede2; color: #1b2330; border-bottom: 1px solid #1b233033; transition: background-color 0.2s; font-family: 'Barlow', system-ui, sans-serif; } .ds-lamina:hover, .ds-lamina:focus-visible { background: #e6e0d0; } .ds-lamina:focus-visible { outline: 3px solid #c9461a; outline-offset: -3px; } .ds-lamina .ds-n { grid-row: span 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 3rem; line-height: 0.85; color: #c9461a; } .ds-lamina h4 { margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 1.5rem; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.01em; } .ds-lamina p { margin: 0; color: #3d4757; max-width: 46ch; }"
+    },
+    {
+      "name": "Group Header",
+      "kind": "custom",
+      "refersTo": "group-header",
+      "description": "Ink bar naming a group of láminas with its color swatch.",
+      "html": "<h3 class=\"ds-group\"><i></i>Nación</h3>",
+      "css": ".ds-group { margin: 0; display: flex; align-items: center; gap: 12px; padding: 10px 24px; background: #1b2330; color: #f1ede2; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.875rem; } .ds-group i { display: block; width: 28px; height: 8px; background: #c9461a; outline: 1px solid #f1ede2; }"
+    },
+    {
+      "name": "Title Block Field",
+      "kind": "custom",
+      "refersTo": "title-block-cell",
+      "description": "A ruled title-block cell: label over value.",
+      "html": "<div class=\"ds-field\"><span class=\"ds-label\">Láminas</span><span class=\"ds-value\">12 propuestas</span></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 4px; padding: 14px 24px 16px; border: 1px solid #1b2330; background: #f1ede2; color: #1b2330; } .ds-label { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8125rem; color: #3d4757; } .ds-value { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 1.35rem; line-height: 1.15; }"
+    },
+    {
+      "name": "Revision Table",
+      "kind": "custom",
+      "refersTo": "revision-header",
+      "description": "Fe de erratas: ruled table with a label-type header row.",
+      "html": "<table class=\"ds-rev\"><thead><tr><th>Rev.</th><th>Fe de erratas</th></tr></thead><tbody><tr><td>A</td><td>Carteles contra EstoesMoises</td></tr></tbody></table>",
+      "css": ".ds-rev { width: 100%; border-collapse: collapse; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; border: 2px solid #1b2330; } .ds-rev th, .ds-rev td { text-align: left; padding: 10px 24px; border-bottom: 1px solid #1b2330; font-weight: 500; font-size: 1.05rem; } .ds-rev th { background: #e6e0d0; color: #3d4757; font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }"
+    },
+    {
+      "name": "Falso Mark",
+      "kind": "chip",
+      "refersTo": "stamp-button",
+      "description": "Orange outlined rubber-stamp mark for a refuted claim.",
+      "html": "<b class=\"ds-falso\">Falso</b>",
+      "css": ".ds-falso { display: inline-block; border: 3px solid #c9461a; color: #c9461a; padding: 6px 14px; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 1.6rem; transform: rotate(-3deg); letter-spacing: 0.02em; }"
+    },
+    {
+      "name": "Signature Box Field",
+      "kind": "input",
+      "refersTo": "signature-box",
+      "description": "Ruled fill-in cell: label above a dashed underline holding the value.",
+      "html": "<div class=\"ds-casilla\"><span class=\"ds-label\">Dirigente</span><span class=\"ds-v\">Nombre</span></div>",
+      "css": ".ds-casilla { display: grid; gap: 22px; align-content: space-between; min-height: 104px; padding: 18px 24px 14px; border: 1px solid #1b2330; background: #f1ede2; } .ds-casilla .ds-label { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8125rem; color: #3d4757; } .ds-v { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 1.5rem; min-height: 1.5rem; border-bottom: 1px dashed #1b2330; color: #1b2330; }"
+    },
+    {
+      "name": "Legend Row",
+      "kind": "nav",
+      "refersTo": "title-block-cell",
+      "description": "Legend entry: 56x18 line swatch beside condensed name; the plan's index.",
+      "html": "<ul class=\"ds-legend\"><li><svg viewBox=\"0 0 56 18\" aria-hidden=\"true\"><path d=\"M0 9H56\" stroke=\"#226582\" stroke-width=\"7\"/><path d=\"M0 9H56\" stroke=\"#f1ede2\" stroke-width=\"7\" stroke-dasharray=\"2 9\"/></svg>Ferrocarril</li></ul>",
+      "css": ".ds-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; } .ds-legend li { display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 14px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 500; font-size: 1.1rem; letter-spacing: 0.02em; color: #1b2330; } .ds-legend svg { width: 56px; height: 18px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Plan Sheet",
+    "overview": "The site is a civil-works drawing, not a campaign page. One hairline-framed sheet of warm paper holds a title block, a plan of the nation, a register of twelve numbered láminas, a revision note, and a signature box. Every surface is a cell of that drawing; nothing floats off it. Ink is a single near-black blue, with two working colors that each mean one thing: signal orange for the wall and the approval, rail teal for the railway.\n\nDensity is that of technical documentation: ruled cells, tabular numerals, condensed drawing lettering, line weights doing the work that cards and shadows do elsewhere. The page is a document to be read and checked, in the voice of a movement addressing neighbours. Linework is drawn at 45 and 90 degrees only, and the plan draws itself on load (wall first, railway second).",
+    "keyCharacteristics": [
+      "One framed sheet on a slightly deeper paper desk; ruled cells instead of cards.",
+      "Ink for structure and text, orange and teal reserved for plan meaning.",
+      "Condensed uppercase lettering for everything that is \"drawn\", plain humanist Barlow for reading.",
+      "Zero radius everywhere; the only tilt is a rubber-stamp gesture.",
+      "Information is shown as plan geometry first; hover on a lámina highlights its feature in the drawing."
+    ],
+    "rules": [
+      { "name": "The Meaning-Only Color Rule", "body": "Orange means wall or approval; teal means railway. A new color is added only when the plan gains a new kind of thing to draw.", "section": "colors" },
+      { "name": "The One Ink Rule", "body": "Every line, border and text block is Delineator Ink or Soft Ink. No tints of other hues for structure.", "section": "colors" },
+      { "name": "The Drawn-or-Read Rule", "body": "Anything that labels, numbers or titles is condensed and uppercase; anything meant to be read as a sentence is Barlow in sentence case.", "section": "typography" },
+      { "name": "The Halo Lettering Rule", "body": "Text laid over linework in the plan gets a 5px paper stroke painted underneath so it stays legible across lines.", "section": "typography" },
+      { "name": "The One Raised Object Rule", "body": "Only the approval stamp lifts off the sheet. Everything else is printed on it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do divide space with ink rules (2px for bands, 1px for cells) instead of gaps, shadows or cards.",
+      "Do draw new features in the plan at 45 or 90 degrees, in ink unless they are a wall (orange) or a railway (teal).",
+      "Do set titles, numerals and field names in condensed uppercase; set sentences in Barlow.",
+      "Do keep orange text at 1.6rem or larger, or as line and fill only.",
+      "Do keep body copy at or under 62ch.",
+      "Do run decorative motion through prefers-reduced-motion handling."
+    ],
+    "donts": [
+      "Don't add border radius, gradients for decoration, or blur.",
+      "Don't introduce a third signal color without a new kind of plan feature to carry it.",
+      "Don't raise anything other than the approval stamp.",
+      "Don't convert láminas into cards, a hero with tagline and CTA row, or an icon grid.",
+      "Don't hard-code new hex values in SVG; add or reuse a named color."
+    ]
+  }
+}

@@ -73,7 +73,7 @@ ol, ul { padding: 0; list-style: none; }
   letter-spacing: -0.005em;
   text-wrap: balance;
 }
-.cartela .field { display: flex; flex-direction: column; gap: 4px; }
+.cartela .field { display: flex; flex-direction: column; justify-content: space-between; gap: 4px; }
 .cartela .value { font-family: var(--label); font-weight: 600; font-size: 1.35rem; line-height: 1.15; }
 
 /* Plan + legend */
@@ -106,6 +106,7 @@ ol, ul { padding: 0; list-style: none; }
   transition: transform 0.25s cubic-bezier(.16,1,.3,1), box-shadow 0.25s cubic-bezier(.16,1,.3,1);
 }
 .stamp:hover, .stamp:focus-visible { transform: rotate(0deg) translateY(-2px); box-shadow: 0 12px 20px -8px #1b2330b0; }
+.stamp:focus-visible { outline: 4px solid var(--ink); outline-offset: 6px; }
 .stamp b { display: block; font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 2rem; line-height: 1; }
 
 /* Program register */
@@ -156,6 +157,10 @@ ol, ul { padding: 0; list-style: none; }
 .casilla .v { font-family: var(--label); font-weight: 600; font-size: 1.5rem; min-height: 1.5rem; border-bottom: 1px dashed var(--ink); }
 
 .pie { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; padding: 14px var(--gutter); border-top: var(--frame); font-family: var(--label); font-weight: 500; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* Etiquetas del plano */
+.t { font-family: var(--label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 22px; fill: var(--ink); }
+.t.sm { font-size: 18px; fill: var(--ink-soft); }
 
 /* Plan drawing: hover linking and entrance */
 .plan svg [data-feature] { transition: opacity 0.25s; }
