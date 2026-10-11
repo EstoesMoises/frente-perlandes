@@ -1,0 +1,2 @@
+Pon aqui las capturas de las obras en curso (png, jpg o webp).
+Luego referencia cada una en src/data/frente.ts, en la lista "obras".

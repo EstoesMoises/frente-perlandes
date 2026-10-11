@@ -6,7 +6,7 @@ import '@fontsource/barlow-condensed/600';
 import '@fontsource/barlow/400';
 import '@fontsource/barlow/600';
 import '../styles/global.css';
-import { frente, grupos, laminas, type Grupo } from '../data/frente';
+import { frente, grupos, laminas, obras, type Grupo } from '../data/frente';
 
 const porGrupo = (Object.keys(grupos) as Grupo[]).map((g) => ({
   clave: g,
@@ -22,6 +22,12 @@ const capturas = Object.entries(
     src: mod.default,
     leyenda: ruta.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '),
   }));
+
+const imagenesObras = import.meta.glob<{ default: ImageMetadata }>('../assets/obras/*.{png,jpg,jpeg,webp}', { eager: true });
+const obrasEnCurso = obras.map((o) => ({
+  ...o,
+  src: o.imagen ? imagenesObras[`../assets/obras/${o.imagen}`]?.default : undefined,
+}));
 
 const casillas = [
   { etiqueta: 'Dirigente', valor: frente.dirigente },
@@ -189,6 +195,27 @@ const casillas = [
           ))}
         </div>
       </section>
+
+      {obrasEnCurso.length > 0 && (
+        <section id="obras" aria-labelledby="obras-t">
+          <div class="section-head">
+            <h2 id="obras-t">Obras en curso</h2>
+            <p>Lo que estamos construyendo ahora, a la vista de todos.</p>
+          </div>
+          <div class="obras">
+            {obrasEnCurso.map((o) => (
+              <article class="obra">
+                {o.src && <Image src={o.src} alt={`Captura de la obra: ${o.titulo}`} widths={[480, 720, 960]} sizes="(max-width: 960px) 100vw, 50vw" />}
+                <div class="obra-body">
+                  <h3>{o.titulo}</h3>
+                  {o.estado && <span class="estado">{o.estado}</span>}
+                  <p>{o.texto}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section class="aviso" id="aviso" aria-labelledby="aviso-t">
         <div class="rev">

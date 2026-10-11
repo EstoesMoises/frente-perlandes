@@ -40,3 +40,14 @@ export const laminas: Lamina[] = [
   { n: '11', titulo: 'Riqueza para el pueblo', texto: 'Que lo que Perland produce llegue a todo el pueblo.', grupo: 'pueblo' },
   { n: '12', titulo: 'Necesidades cubiertas', texto: 'Que nadie en Perland se quede sin lo que necesita.', grupo: 'pueblo' },
 ];
+
+// Obras y misiones en curso. Cada una puede llevar una captura de src/assets/obras/.
+// Ejemplo: { titulo: 'El muro, tramo norte', texto: 'Qué se está haciendo.', estado: 'En curso', imagen: 'muro-norte.png' }
+export interface Obra {
+  titulo: string;
+  texto: string;
+  estado?: string;
+  imagen?: string;
+}
+
+export const obras: Obra[] = [];

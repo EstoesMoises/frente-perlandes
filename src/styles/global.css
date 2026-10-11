@@ -129,6 +129,15 @@ ol, ul { padding: 0; list-style: none; }
 .c-obra { --c: var(--teal); }
 .c-pueblo { --c: var(--ink); }
 
+/* Obras en curso */
+.obras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); border-bottom: var(--frame); }
+.obra { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); display: flex; flex-direction: column; }
+.obra img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--ink); }
+.obra-body { padding: 18px var(--gutter) 24px; display: grid; gap: 8px; justify-items: start; }
+.obra h3 { font-family: var(--label); font-weight: 600; font-size: 1.5rem; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.01em; }
+.obra .estado { font-family: var(--label); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--ink); padding: 2px 8px; }
+.obra p { color: var(--ink-soft); max-width: 52ch; }
+
 /* Fe de erratas */
 .aviso { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); border-bottom: var(--frame); }
 .rev { border-right: var(--frame); }
