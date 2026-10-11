@@ -26,7 +26,7 @@ const capturas = Object.entries(
 const imagenesObras = import.meta.glob<{ default: ImageMetadata }>('../assets/obras/*.{png,jpg,jpeg,webp}', { eager: true });
 const obrasEnCurso = obras.map((o) => ({
   ...o,
-  src: o.imagen ? imagenesObras[`../assets/obras/${o.imagen}`]?.default : undefined,
+  fotos: (o.imagenes ?? []).map((n) => imagenesObras[`../assets/obras/${n}`]?.default).filter(Boolean),
 }));
 
 const casillas = [
@@ -205,7 +205,13 @@ const casillas = [
           <div class="obras">
             {obrasEnCurso.map((o) => (
               <article class="obra">
-                {o.src && <Image src={o.src} alt={`Captura de la obra: ${o.titulo}`} widths={[480, 720, 960]} sizes="(max-width: 960px) 100vw, 50vw" />}
+                {o.fotos.length > 0 && (
+                  <div class={`fotos fotos-${o.fotos.length}`}>
+                    {o.fotos.map((f) => (
+                      <Image src={f} alt={`Captura de la obra: ${o.titulo}`} widths={[480, 720, 960]} sizes="(max-width: 960px) 100vw, 50vw" />
+                    ))}
+                  </div>
+                )}
                 <div class="obra-body">
                   <h3>{o.titulo}</h3>
                   {o.estado && <span class="estado">{o.estado}</span>}

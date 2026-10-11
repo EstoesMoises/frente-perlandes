@@ -42,12 +42,31 @@ export const laminas: Lamina[] = [
 ];
 
 // Obras y misiones en curso. Cada una puede llevar una captura de src/assets/obras/.
-// Ejemplo: { titulo: 'El muro, tramo norte', texto: 'Qué se está haciendo.', estado: 'En curso', imagen: 'muro-norte.png' }
+// Ejemplo: { titulo: 'El muro', texto: 'Qué se está haciendo.', estado: 'En curso', imagenes: ['muro.png'] }
 export interface Obra {
   titulo: string;
   texto: string;
   estado?: string;
-  imagen?: string;
+  imagenes?: string[];
 }
 
-export const obras: Obra[] = [];
+export const obras: Obra[] = [
+  {
+    titulo: 'Pavimentación y modernización de Perland',
+    texto: 'Pavimentamos las calles del pueblo de Perland y las modernizamos para que puedan abrir más negocios.',
+    estado: 'En curso',
+    imagenes: ['pavimentacion-1.png', 'pavimentacion-2.png'],
+  },
+  {
+    titulo: 'Recuperación de la Torre Perliniana de la Victoria',
+    texto: 'Recuperamos el patrimonio de Perland: la Torre Perliniana de la Victoria.',
+    estado: 'En curso',
+    imagenes: ['recuperacion-patrimonio.png'],
+  },
+  {
+    titulo: 'Ayuntamiento en el área del bosque',
+    texto: 'Construimos el ayuntamiento en el área del bosque.',
+    estado: 'En curso',
+    imagenes: ['construccion-ayuntamiento.png'],
+  },
+];
